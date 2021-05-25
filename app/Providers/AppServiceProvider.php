@@ -3,14 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
-use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\Schema;
 
-use App\Models\User;
-use App\Models\Activation;
-use App\Observers\UserObserver;
-use App\Observers\ActivationObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,10 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->app->isLocal()) {
-            $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
-            $this->app->register(TelescopeServiceProvider::class);
-        }
+        
     }
 
     /**
@@ -45,16 +36,5 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(200); // Default String Length on Database
         $this->registerPolicies();
-
-        /**
-         * Add passport routes
-         */
-        Passport::routes();
-
-        /**
-         * Register Observers
-         */
-        User::observe(UserObserver::class);
-        Activation::observe(ActivationObserver::class);
     }
 }

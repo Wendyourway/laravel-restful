@@ -4,10 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
-use App\Models\Role;
-use App\Models\Media;
-use App\Models\Option;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -34,12 +30,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-        Route::model('user', User::class);
-        Route::model('role', Role::class);
-        Route::model('media', Media::class);
-        Route::model('option', Option::class);
-
         parent::boot();
     }
 
