@@ -12,6 +12,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+id_rsa_shared
 
 # Ignore DevSpace cache and log folder
 .devspace/
