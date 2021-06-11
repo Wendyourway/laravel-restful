@@ -10,3 +10,8 @@
   | is assigned the "api" middleware group. Enjoy building your API!
   |
  */
+use Illuminate\Support\Facades\Route;
+
+Route::resource('example','ExampleController', [
+  'except' => ['create', 'edit']
+]);
