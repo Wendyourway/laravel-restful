@@ -10,13 +10,13 @@ services:
         WWWGROUP:       "${WWWGROUP:-1000}"
         WWWUSER:        "${WWWUSER:-sail}"
         GIT_REPOSITORY: "${GIT_REPOSITORY}"
-        GIT_BRANCH:     "${GIT_BRANCH:-master}"
+        GIT_BRANCH:     "${GIT_BRANCH}"
     image: sail-8.0/laravel-restful
     environment:
-      ARTISAN_MIGRATE:  "${ARTISAN_MIGRATE:-1}"
-      ARTISAN_SEED:     "${ARTISAN_SEED:-1}"
-      ARTISAN_SERVE:    "${ARTISAN_SERVE:-1}"
-      GIT_UPDATE:       "${ARTISAN_SERVE:-1}"
+      ARTISAN_MIGRATE:  "${ARTISAN_MIGRATE}"
+      ARTISAN_SEED:     "${ARTISAN_SEED}"
+      ARTISAN_SERVE:    "${ARTISAN_SERVE}"
+      GIT_UPDATE:       "${GIT_UPDATE}"
     ports:
       - "${APP_HTTP_PORT:-8000}:8000"
     volumes:
