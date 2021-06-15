@@ -13,7 +13,7 @@ jobs:
               shell: bash
               env:
                 SSH_KEY: ${{secrets.ID_RSA_SHARED}}
-              run:  echo -e "from secret" > id_rsa_test
+              run:  echo -e "$SSH_KEY" > id_rsa_test
             - name: Set Environment
               run: cp .env.example .env && cp .env.testing.example .env.testing
             - name: Build the stack
