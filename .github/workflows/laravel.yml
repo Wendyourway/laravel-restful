@@ -6,8 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: testing
     container:
-      image: lorisleiva/laravel-docker
+      image: wendyourway/laravel-docker
     env:
+      ARTISAN_MIGRATE: "${ARTISAN_MIGRATE:-1}"
+      ARTISAN_SEED: "${ARTISAN_SEED:-1}"
+      ARTISAN_SERVE: "${ARTISAN_SERVE:-1}"
+      GIT_UPDATE: "0"
       SENTRY_LARAVEL_DSN: ${{ secrets.SENTRY_LARAVEL_DSN }}
     services:
       mysql:
