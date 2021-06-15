@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: testing
     container:
-      image: lorisleiva/laravel-docker
+      image: wendyourway/laravel-docker
     env:
       ARTISAN_MIGRATE: "${ARTISAN_MIGRATE:-1}"
       ARTISAN_SEED: "${ARTISAN_SEED:-1}"
