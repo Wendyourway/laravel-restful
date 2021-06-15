@@ -41,7 +41,12 @@ build-docker:
     - master
 
 build-composer:
-  image: lorisleiva/laravel-docker
+  image: wendyourway/laravel-docker
+  environment:
+    ARTISAN_MIGRATE: "${ARTISAN_MIGRATE:-1}"
+    ARTISAN_SEED: "${ARTISAN_SEED:-1}"
+    ARTISAN_SERVE: "${ARTISAN_SERVE:-1}"
+    GIT_UPDATE: "0"
   stage: build
   script:
     - cp .env.testing.example .env
@@ -59,19 +64,17 @@ build-composer:
       - storage/logs
 
 artisan-test:
-  image: lorisleiva/laravel-docker
+  image: wendyourway/laravel-docker
+  environment:
+    ARTISAN_MIGRATE: "${ARTISAN_MIGRATE:-1}"
+    ARTISAN_SEED: "${ARTISAN_SEED:-1}"
+    ARTISAN_SERVE: "${ARTISAN_SERVE:-1}"
+    GIT_UPDATE: "0"
   stage: test
   services:
     - mysql:8.0
   script:
-    - cp ./resources/docker/sail/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     - cp .env.testing.example .env.testing
-    - php artisan key:generate
-    - php artisan migrate
-    - php artisan db:seed
-    - php artisan passport:install
-    - php artisan queue:work &
-    - php artisan serve &
     - php artisan test --env=testing
   only:
     - pull_request

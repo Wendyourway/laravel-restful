@@ -10,8 +10,25 @@
   | is assigned the "api" middleware group. Enjoy building your API!
   |
  */
+
+
+use App\Http\Controllers\FareharborController;
 use Illuminate\Support\Facades\Route;
 
-Route::resource('example','ExampleController', [
-  'except' => ['create', 'edit']
-]);
+
+
+Route::prefix('companies')->group(function () {
+  Route::get('/', [FareharborController::class, 'index']);
+  Route::prefix('{company}')->group(function () {
+    Route::get('/', [FareharborController::class, 'getCompany']);
+    Route::get('items', );
+    Route::prefix('items')->group(function () {
+      Route::get('/', [FareharborController::class, 'getItems']);
+      Route::get('{itemId}/availabilities/{date}/', [FareharborController::class, 'getAvailableItems']);
+    });
+    Route::post('availabilities/{pk}/bookings/', [FareharborController::class, 'addNewBooking']);
+    Route::get('bookings/{uuid}/', [FareharborController::class, 'getBooking']);
+    Route::delete('bookings/{uuid}/', [FareharborController::class, 'deleteBooking']);
+    Route::post('availabilities/{pk}/bookings/{uuid}/', [FareharborController::class, 'rebooking']);
+  });
+});
