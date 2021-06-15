@@ -21,7 +21,6 @@ services:
       - "${APP_HTTP_PORT:-8000}:8000"
     volumes:
       - ".:/var/www/html"
-      - "./setup.sh:/var/www/html/setup.sh"
     networks:
       - "laravel_network"
     secrets:
