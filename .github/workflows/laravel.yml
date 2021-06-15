@@ -8,6 +8,10 @@ jobs:
     container:
       image: lorisleiva/laravel-docker
     env:
+      ARTISAN_MIGRATE: "${ARTISAN_MIGRATE:-1}"
+      ARTISAN_SEED: "${ARTISAN_SEED:-1}"
+      ARTISAN_SERVE: "${ARTISAN_SERVE:-1}"
+      GIT_UPDATE: 0
       SENTRY_LARAVEL_DSN: ${{ secrets.SENTRY_LARAVEL_DSN }}
     services:
       mysql:
@@ -20,10 +24,16 @@ jobs:
         ports:
           - 33306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    permissions:
+      actions: write
     steps:
-    - uses: actions/checkout@v2
-    - name: Copy xdebug configuration
-      run: cp ./resources/docker/sail/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    - name: test
+      run: ls -la
+    - name: Check out code
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ env.BASE_BRANCH }}
+        token: ${{ github.token }}
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.testing.example', '.env');"
     - name: Copy .env.testing

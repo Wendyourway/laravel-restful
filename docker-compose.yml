@@ -16,7 +16,7 @@ services:
       ARTISAN_MIGRATE:  "${ARTISAN_MIGRATE:-1}"
       ARTISAN_SEED:     "${ARTISAN_SEED:-1}"
       ARTISAN_SERVE:    "${ARTISAN_SERVE:-1}"
-      GIT_UPDATE:       "1"
+      GIT_UPDATE:       "${ARTISAN_SERVE:-1}"
     ports:
       - "${APP_HTTP_PORT:-8000}:8000"
     volumes:
