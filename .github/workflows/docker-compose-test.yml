@@ -9,6 +9,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
+            - name: Write secret from github secret
+              shell: bash
+              env:
+                SSH_KEY: ${{secrets.ID_RSA_SHARED}}
+              run:  echo -e "from secret" > id_rsa_test
             - name: Set Environment
               run: cp .env.example .env && cp .env.testing.example .env.testing
             - name: Build the stack
